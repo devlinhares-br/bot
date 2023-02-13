@@ -1,1 +1,1 @@
-python botAPI.py
+python -m botAPI.py
