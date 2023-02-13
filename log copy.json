@@ -1,8 +1,0 @@
-{
-    "id": "R001",
-    "anterior":"INI0",
-    "request": "https://wdapi.com.br/placas/<placa>/85166010aa22a2ae585247bfb8ca56d6",
-    "next":"O002",
-    "var":["placa"],
-    "data": ["MARCA", "MODELO", "VERSAO","ano","chassi","cor"]
-}
