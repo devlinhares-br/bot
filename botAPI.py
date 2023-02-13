@@ -11,9 +11,6 @@ def index():
     data = urllib.parse.unquote(data)
     data = urllib.parse.parse_qs(data)
 
-    arquivo = open("log.txt", "a")
-    arquivo.write(f"\n\n{data}")
-
     if(str(data['event']) == "['ONIMBOTMESSAGEADD']" and data['data[PARAMS][FROM_USER_ID]'] == data['data[USER][ID]'] ):
         data = parseDict(data)
         bot.bot(data)
