@@ -59,7 +59,6 @@ def getChat(chat_id, domain, count = False):
     r = request.content
     r = urllib.parse.unquote(r)
     r = json.loads(r)
-    print(r)
     return r if count == False else len(r)
 
 def setConversa(bot_id, client_id, dialog_id, chat_id, domain):
@@ -69,7 +68,6 @@ def setConversa(bot_id, client_id, dialog_id, chat_id, domain):
     }
     request = requests.post(f"{baseUrl}/insert", json=data)
     r = urllib.parse.unquote(request.content)
-    print(r)
     return r
 
 def getBlock(idBlcok, client_id = ""):
@@ -81,7 +79,6 @@ def getBlock(idBlcok, client_id = ""):
     if request == -1: return '-1'
     r = urllib.parse.unquote(request.content)
     r = json.loads(r)
-    print(r)
     return r
 
 def getAction(block = {}):
@@ -106,7 +103,6 @@ def updateLastBlock(bloco, bot_id, client_id, chat_id):
     }
     request = requests.post(f"{baseUrl}/update", json=data)
     r = urllib.parse.unquote(request.content)
-    print(r)
     return r
 
 def updateMsgEnviada(msgEnviada, bot_id, client_id, chat_id):
@@ -125,7 +121,6 @@ def updateMsgEnviada(msgEnviada, bot_id, client_id, chat_id):
     request = requests.post(f"{baseUrl}/update", json=data)
     r = urllib.parse.unquote(request.content)
     r = json.loads(r)
-    print(r)
     return r
 
 def getBot(client_id):
@@ -137,9 +132,7 @@ def getBot(client_id):
     try:
         r = urllib.parse.unquote(request.content)
     except Exception as err:
-        print(err)
         return False
-    print(r)
     return r
 
 def insertVar(client_id, chat_id, var, valor):
@@ -149,7 +142,6 @@ def insertVar(client_id, chat_id, var, valor):
     }
     request = requests.post(f"{baseUrl}/insertVar", json=data)
     r = urllib.parse.unquote(request.content)
-    print(r)
     return r
 
 def getVar(client_id, chat_id, var, count = False):
@@ -162,7 +154,6 @@ def getVar(client_id, chat_id, var, count = False):
     }
     request = requests.post(f"{baseUrl}/getVar", json=data)
     r = urllib.parse.unquote(request.content)
-    print(r)
     return r if count == False else len(r)
 
 def strToList(data = ""):

@@ -13,6 +13,9 @@ def bot(dados = {}):
         bot_functions.chatTransfer(chat_id = dados['data']['PARAMS']['CHAT_ID'], id = id, line = False, extranet = dados['data']['USER']["IS_EXTRANET"], BOT_ID = auth[1], CLIENT_ID = auth[0], REST = auth[2])
         bot_functions.chatLeave(chat_id=dados['data']['PARAMS']['CHAT_ID'], BOT_ID=auth[1], CLIENT_ID=auth[0], REST=auth[2])
         return '200'
+    
+    if data['USER']['IS_EXTRANET'] != 'Y':
+        bot_functions.chatLeave(chat_id=dados['data']['PARAMS']['CHAT_ID'], BOT_ID=auth[1], CLIENT_ID=auth[0], REST=auth[2])
 
     conversa = bot_functions.getChat(dados['data']["PARAMS"]["CHAT_ID"], dados["auth"]["domain"], count = True)
     if conversa == 0:

@@ -1,6 +1,6 @@
 from flask import Flask, request
 from bot_functions import getBot, strToList
-import urllib.parse, bot, json
+import urllib.parse, bot
 
 app = Flask(__name__)
 
@@ -12,6 +12,8 @@ def index():
     data = urllib.parse.parse_qs(data)
 
     if(str(data['event']) == "['ONIMBOTMESSAGEADD']" and data['data[PARAMS][FROM_USER_ID]'] == data['data[USER][ID]'] ):
+        with open('log.log', 'w') as arquivo:
+            arquivo.write(f'{data}\n')
         data = parseDict(data)
         bot.bot(data)
 
@@ -21,7 +23,6 @@ def parseDict(data=dict()):
     
     data = remove(data)
     id = getBot(data['auth[application_token]'])
-    print(id)
     if id == '-1': return 'Não autorizado!'
     else: id = strToList(id)
     data = {
