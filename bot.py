@@ -14,7 +14,7 @@ def bot(dados = {}):
         bot_functions.chatLeave(chat_id=dados['data']['PARAMS']['CHAT_ID'], BOT_ID=auth[1], CLIENT_ID=auth[0], REST=auth[2])
         return '200'
     
-    if data['USER']['IS_EXTRANET'] != 'Y':
+    if dados['data']['USER']['IS_EXTRANET'] != 'Y':
         bot_functions.chatLeave(chat_id=dados['data']['PARAMS']['CHAT_ID'], BOT_ID=auth[1], CLIENT_ID=auth[0], REST=auth[2])
 
     conversa = bot_functions.getChat(dados['data']["PARAMS"]["CHAT_ID"], dados["auth"]["domain"], count = True)
