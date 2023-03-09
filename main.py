@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, Response, json
 from bot_functions import getBot, strToList
 import urllib.parse, bot
 
@@ -25,7 +25,8 @@ def parseDict(data=dict()):
     id = getBot(data['auth[application_token]'])
     if id == '-1': return 'Não autorizado!'
     else: id = strToList(id)
-    data = {
+    try:
+        data = {
         'event': data['event'],
         'data':{
             'BOT': {
@@ -50,6 +51,8 @@ def parseDict(data=dict()):
                 'token': data['auth[application_token]']
             }
     }
+    except Exception as e:
+        return gera_response(400, "retunr", "Erro ao gerar o dicionário.\nConteudo faltando.")
     return data
 
 def remove(data = {}):
@@ -58,6 +61,14 @@ def remove(data = {}):
         data[key] = str(data[key]).replace("]","")
         data[key] = str(data[key]).replace("[","")
     return data
+
+def gera_response(status, nome_conteudo, conteudo, mensagem=False):
+    body = {}
+    body[nome_conteudo] = conteudo
+    if mensagem:
+        body["msg"] = mensagem
+    
+    return Response(json.dumps(body), status, mimetype="application/json")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=12120)
