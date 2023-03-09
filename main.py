@@ -1,6 +1,10 @@
 from flask import Flask, request, Response, json
 from bot_functions import getBot, strToList
 import urllib.parse, bot
+import logging
+
+
+logging.basicConfig(filename='bot.log', level=logging.DEBUG)
 
 app = Flask(__name__)
 
