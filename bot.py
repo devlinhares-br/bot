@@ -58,7 +58,8 @@ def bot(dados = {}):
                     bot_functions.updateMsgEnviada(msgEnviada=0, bot_id=auth[1], client_id=auth[0], chat_id=dados['data']['PARAMS']['CHAT_ID'])
                     conversa = bot_functions.getChat(dados['data']["PARAMS"]["CHAT_ID"], dados["auth"]["domain"])
             else:
-                bot_functions.insertVar(client_id = auth[0], chat_id = dados['data']['PARAMS']['CHAT_ID'],  var = chat['var'], valor = dados['data']['PARAMS']['MESSAGE'])
+                if('not_guard_var' not in chat):
+                    bot_functions.insertVar(client_id = auth[0], chat_id = dados['data']['PARAMS']['CHAT_ID'],  var = chat['var'], valor = dados['data']['PARAMS']['MESSAGE'])
                 chat = bot_functions.getBlock(chat['next'],auth[0])
                 bot_functions.updateLastBlock(bloco=chat['id'], bot_id=auth[1], client_id=auth[0], chat_id=dados['data']['PARAMS']['CHAT_ID'])
                 chat = json.dumps(chat)
