@@ -216,5 +216,19 @@ def creat_lead(dialog_id, fields = {}, **kwargs):
     if not (('BOT_ID' in kwargs) and ('CLIENT_ID' in kwargs)):
         return 0
     params = urllib.parse.urlencode(kwargs)
-    request = requests.get(f"{kwargs['REST']}crm.lead.add.json?{params}&DIALOG_ID={dialog_id}")
+    fields = __encode_dict(fields)
+    request = requests.get(f"{kwargs['REST']}crm.lead.add.json?{params}&DIALOG_ID={dialog_id}&{fields}")
     return request.content
+
+
+def __encode_dict(d, prefix=''):
+    items = []
+    for key, value in d.items():
+        if isinstance(value, dict):
+            items.extend(__encode_dict(value, prefix + key + '['))
+        elif isinstance(value, list):
+            for index, item in enumerate(value):
+                items.extend(__encode_dict(item, prefix + key + '[' + str(index) + ']' + '['))
+        else:
+            items.append((prefix + key, value))
+    return items
