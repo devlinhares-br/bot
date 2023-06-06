@@ -207,3 +207,14 @@ def requisicao(r="", data=[], **kwargs):
     except:
         return 'Algo deu errado'
     return '200'
+
+def search_by_field(**kwargs):
+    if not (('BOT_ID' in kwargs) and ('CLIENT_ID' in kwargs)):
+        pass
+    
+def creat_lead(dialog_id, fields = {}, **kwargs):
+    if not (('BOT_ID' in kwargs) and ('CLIENT_ID' in kwargs)):
+        return 0
+    params = urllib.parse.urlencode(kwargs)
+    request = requests.get(f"{kwargs['REST']}crm.lead.add.json?{params}&DIALOG_ID={dialog_id}")
+    return request.content

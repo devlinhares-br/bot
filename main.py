@@ -75,4 +75,5 @@ def gera_response(status, nome_conteudo, conteudo, mensagem=False):
     return Response(json.dumps(body), status, mimetype="application/json")
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=12120)
+    # app.run(host='0.0.0.0',port=12120)
+    app.run()

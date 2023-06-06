@@ -76,6 +76,18 @@ def bot(dados = {}):
         chat = bot_functions.getBlock(chat['next'],auth[0])
         chat = json.dumps(chat)
         chat = json.loads(chat)
+        
+    if('BL' in chat):
+        fields = {
+            "NAME": dados['data']['USER']['NAME'],
+
+        }
+        bot_functions.creat_lead(dialog_id=dados['data']['PARAMS']['DIALOG_ID'], BOT_ID=auth[1], CLIENT_ID=auth[0], REST=auth[2], FIELDS=fields)
+        bot_functions.updateLastBlock(bloco=chat['op'][str(item + 1)], bot_id=auth[1], client_id=auth[0], chat_id=dados['data']['PARAMS']['CHAT_ID'])
+        conversa = bot_functions.getChat(dados['data']["PARAMS"]["CHAT_ID"], dados["auth"]["domain"])
+        chat = bot_functions.getBlock(conversa[0][3], auth[0])
+        bot(dados = dados)
+        
 
 
     if('mensagem' in chat and chat['id'] == str(conversa[0][3]) and conversa[0][4] == 0 and 'M' not in chat['id'] and 'G' not in chat['id']):       
