@@ -4,9 +4,11 @@ import urllib.parse, bot
 import logging
 
 
-logging.basicConfig(filename='bot.log', level=logging.DEBUG)
-
 app = Flask(__name__)
+
+
+logging.basicConfig(filename='access.log', level=logging.INFO,
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 # bot
 @app.route("/bot", methods=['POST'])
